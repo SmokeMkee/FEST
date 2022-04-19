@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'login/login.dart';
 import 'nav_bar/navigation_bar.dart';
+import 'news/add_news.dart';
+import 'news/news_details.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +15,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -28,7 +29,17 @@ class MyApp extends StatelessWidget {
       ),
       routes: {
         '/auth' : (context)  => LoginForm(),
-        '/main_screen' : (context) => NavBar()
+        '/main_screen' : (context) => NavBar(),
+        '/main_screen/movie_details' : (context) {
+        final arguments =  ModalRoute.of(context)!.settings.arguments;
+        if(arguments is int){
+          return NewsDetails(id: arguments);
+        }else{
+          return NewsDetails(id: 0,);
+        }
+
+        },
+        '/main_screen/add_news' : (context) => add_news()
       },
         initialRoute:'/auth' ,
 

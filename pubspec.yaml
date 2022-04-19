@@ -69,6 +69,7 @@ flutter:
   - assets/profile.svg
   - assets/message.svg
   - assets/search.svg
+
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

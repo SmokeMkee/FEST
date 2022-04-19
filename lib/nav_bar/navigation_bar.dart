@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-import '../news/news.dart';
+import '../news/list_news.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({Key? key}) : super(key: key);
@@ -11,8 +11,8 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  static const List<Widget> _widgetOptions = <Widget>[
-    News(),
+  static  List<Widget> _widgetOptions = <Widget>[
+    ListNews(),
     Text(
       'Index 1: Услуги',
 
