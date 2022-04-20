@@ -1,12 +1,15 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:itfest/api_controllers/department_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'api_enums.dart';
 
 class AccountController {
   static Future<int> login(String email, String password) async{
+
+
     Uri url = Uri.parse(Api.domain + "account/login");
     Dio dio = Dio();
     var result = await dio.postUri(url, options: Api.options, data: {
@@ -24,5 +27,26 @@ class AccountController {
 
     return result.statusCode!;
   }
+
+  static Future<int> createEmployee(dynamic data, String accessToken) async{
+    try {
+      var depResult = await DepartmentController.create(
+          data['departmentName'], accessToken);
+      print(depResult);
+    }
+    catch(e){
+      print(e);
+    }
+    Uri url = Uri.parse(Api.domain + "account/create");
+    Dio dio = Dio();
+    var result = await dio.postUri(url, options: Api.authorizeOptions(accessToken), data: data);
+
+    print(result.statusCode);
+
+    print(result.data);
+
+    return result.statusCode!;
+  }
+
 
 }

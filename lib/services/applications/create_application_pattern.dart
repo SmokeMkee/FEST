@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:itfest/api_controllers/department_controller.dart';
 
 class CreateApplicationPattern extends StatefulWidget {
   const CreateApplicationPattern({Key? key}) : super(key: key);
@@ -17,9 +18,28 @@ class _CreateApplicationPatternState extends State<CreateApplicationPattern> {
   List<String> items = <String>[];
   List<TextEditingController> controllers = <TextEditingController>[];
 
+  TextEditingController name = TextEditingController();
+
+  String? department = "";
+  List<String> departments = [];
+
   @override
   void initState() {
     addresserController.text = "Адресат заявления";
+    DepartmentController.get().then((value) {
+      setState(() {
+        var list = value as List;
+
+        for(int i = 0; i < list.length; i++){
+          if(list[i]['name'] == "organization"){
+            departments.add("Для целой организации");
+            continue;
+          }
+          departments.add(list[i]['name']);
+        }
+        department = "Для целой организации";
+      });
+    });
   }
 
   @override
@@ -64,11 +84,34 @@ class _CreateApplicationPatternState extends State<CreateApplicationPattern> {
                         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 216, 224, 228))),
                         labelText: "Название заявления",
                       labelStyle: TextStyle(fontSize: 24, color: Colors.blueGrey),
-
                     ),
-
                   ),
                 ),
+                SizedBox(height: 20,),
+                DropdownButtonFormField(
+                    decoration: InputDecoration(
+                      labelText: "Департамент",
+                      labelStyle: TextStyle(fontSize: 20),
+                      border: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(
+                          const Radius.circular(15.0),
+                        ),
+                      ),
+                    ),
+                    value: department,
+                    items: departments.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(), onChanged: (String? newValue){
+                  setState(() {
+                    department = newValue!;
+                  });
+                }),
+                SizedBox(height: 10,),
+                Text("*Внутри какого департамента принята данная форма"),
+                SizedBox(height: 20,),
                 Padding(
                   padding:
                   const EdgeInsets.only(top: 15),
@@ -114,7 +157,6 @@ class _CreateApplicationPatternState extends State<CreateApplicationPattern> {
                                   });
                                 },
                                 child: SvgPicture.asset("assets/trash_icon.svg", width: 32, color: Color.fromARGB(255, 66, 104, 124),))
-                            
                           ],
                         ),
                       );
@@ -164,6 +206,7 @@ class _CreateApplicationPatternState extends State<CreateApplicationPattern> {
                     ),
                   ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: Container(
@@ -172,7 +215,10 @@ class _CreateApplicationPatternState extends State<CreateApplicationPattern> {
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     child: TextButton(
                       onPressed: () {
-                        print(controllers.length);
+                        dynamic data = {};
+
+                        data['name'] = name.text;
+
                         for(int i = 0; i < controllers.length; i++){
                           print(controllers[i].text);
                         }

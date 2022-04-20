@@ -19,6 +19,7 @@ class Api{
       return {
         "Accept": "application/json; charset=utf-8",
         "Content-Type": "application/json;charset=utf-8",
+        "Authorization": "Bearer " + accessToken
       };
     }
 

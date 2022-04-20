@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:itfest/api_controllers/account_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateEmployee extends StatefulWidget {
   const CreateEmployee({Key? key}) : super(key: key);
@@ -219,22 +220,32 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                         color: Color.fromARGB(255, 66, 104, 124),
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     child: TextButton(
-                      onPressed: () {
+                      onPressed: () async {
                         List<dynamic> positionNames = [];
 
                         for(int i = 0; i < controllers.length; i++){
                           positionNames.add({"positionName": controllers[i].text});
                         }
 
-                        // AccountController.createEmployee({
-                        //   {
-                        //     "fullName": name.text,
-                        //     "email": email.text,
-                        //     "role": role,
-                        //     "departmentName": department.text,
-                        //     "positions": positionNames
-                        //   }
-                        // });
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+
+                        try {
+                          AccountController.createEmployee(
+                              {
+                                "fullName": name.text,
+                                "email": email.text,
+                                "role": role,
+                                "departmentName": department.text,
+                                "positions": positionNames
+                              }, prefs.getString('accessToken')!).then((value) {
+                                if(value == 200){
+                                  Navigator.pop(context);
+                                }
+                          });
+                        } catch(e){
+
+                        }
+                        print(prefs.getString("accessToken"));
 
                       },
                       child: Padding(
