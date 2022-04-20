@@ -4,6 +4,7 @@ import 'package:itfest/services/applications/create_application_pattern.dart';
 import 'package:itfest/services/attendance/attendance.dart';
 import 'package:itfest/services/employees/create_employee.dart';
 import 'package:itfest/services/employees/employees.dart';
+import 'package:itfest/profile/profile.dart';
 
 import 'login/login.dart';
 import 'nav_bar/navigation_bar.dart';

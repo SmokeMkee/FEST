@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:itfest/services/services.dart';
 import 'package:itfest/tasks/tasks.dart';
+import 'package:itfest/chat/chat.dart';
+import 'package:itfest/profile/profile.dart';
 
 import '../news/list_news.dart';
 
@@ -17,10 +19,8 @@ class _NavBarState extends State<NavBar> {
     ListNews(),
     Services(),
     Tasks(),
-    Text(
-      'Чат'
-    ),
-    Text('Профиль')
+    ChatWidget(),
+    Profile()
   ];
   
   int _selectedPage = 0;
