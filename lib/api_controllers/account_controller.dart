@@ -13,8 +13,8 @@ class AccountController {
     Uri url = Uri.parse(Api.domain + "account/login");
     Dio dio = Dio();
     var result = await dio.postUri(url, options: Api.options, data: {
-      "Email": email,
-      "Password": password
+      "email": email,
+      "password": password
     });
 
     print(result.statusCode);
@@ -24,7 +24,7 @@ class AccountController {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     prefs.setString("accessToken", result.data['token']);
-
+  print(result.statusMessage);
     return result.statusCode!;
   }
 

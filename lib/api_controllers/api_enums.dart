@@ -11,6 +11,7 @@ class Api{
 
   static Options authorizeOptions (String accessToken) {
     return Options(
+
         followRedirects: true, headers: authorizationHeaders(accessToken));
   }
 

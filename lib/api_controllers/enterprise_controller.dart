@@ -23,6 +23,8 @@ class EnterpriseController {
     Dio dio = Dio();
     var result = await dio.getUri(url, options: Api.options);
 
+    print(result.statusCode!);
     return result.statusCode!;
+
   }
 }
