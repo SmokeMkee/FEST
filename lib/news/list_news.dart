@@ -71,7 +71,7 @@ class _ListNewsState extends State<ListNews> {
             'Это возможность в короткие сроки в мощной творческой обстановке реализовать проект ssssssssssssssss'),
     News(
       id: 6,
-        title: 'IT-FEST 2022',
+        title: 'IT-FEST 2021',
         image:
             'https://static.wixstatic.com/media/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg/v1/fill/w_960,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg',
         time: '45 минут назад',
@@ -153,7 +153,7 @@ class _ListNewsState extends State<ListNews> {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             padding: EdgeInsets.only(top: 61),
             itemCount: filteredNews.length,
-            itemExtent: 320,
+            itemExtent: 400,
             itemBuilder: (BuildContext context, int index) {
               final news = filteredNews[index];
               return Padding(

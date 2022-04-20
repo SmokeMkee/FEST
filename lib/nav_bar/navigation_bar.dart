@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:itfest/services/services.dart';
+import 'package:itfest/tasks/tasks.dart';
 
 import '../news/list_news.dart';
 
@@ -13,14 +15,8 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   static  List<Widget> _widgetOptions = <Widget>[
     ListNews(),
-    Text(
-      'Index 1: Услуги',
-
-    ),
-    Text(
-      'Index 2: Задачи',
-
-    ),
+    Services(),
+    Tasks(),
     Text(
       'Чат'
     ),

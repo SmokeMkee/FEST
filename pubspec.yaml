@@ -69,6 +69,14 @@ flutter:
   - assets/profile.svg
   - assets/message.svg
   - assets/search.svg
+  - assets/applications_icon.svg
+  - assets/attendance_icon.svg
+  - assets/employees_icon.svg
+  - assets/add_icon.svg
+  - assets/trash_icon.svg
+  - assets/open_task_icon.svg
+  - assets/in_process_icon.svg
+  - assets/success_icon.svg
 
   # assets:
   #   - images/a_dot_burr.jpeg
