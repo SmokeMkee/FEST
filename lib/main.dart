@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:itfest/services/applications/applications_list.dart';
+import 'package:itfest/services/applications/create_application_pattern.dart';
+import 'package:itfest/services/attendance/attendance.dart';
+import 'package:itfest/services/employees/create_employee.dart';
+import 'package:itfest/services/employees/employees.dart';
 import 'package:itfest/profile/profile.dart';
 
 import 'login/login.dart';
@@ -14,37 +19,50 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: Colors.blue,
-          showUnselectedLabels: true,
-          selectedItemColor: Color.fromRGBO(68, 167, 184, 1),
-          unselectedItemColor: Color.fromRGBO(144, 153, 170, 1),
-          unselectedLabelStyle: TextStyle(color:Color.fromRGBO(144, 153, 170, 1) ),
-          selectedLabelStyle:TextStyle(color:Color.fromRGBO(144, 153, 170, 1) ) ,
+    return GestureDetector(
+      onTap: (){
+        FocusScopeNode currentFocus = FocusScope.of(context);
 
-        )
-      ),
-      routes: {
-        '/auth' : (context)  => LoginForm(),
-        '/main_screen' : (context) => NavBar(),
-        '/main_screen/movie_details' : (context) {
-        final arguments =  ModalRoute.of(context)!.settings.arguments;
-        if(arguments is int){
-          return NewsDetails(id: arguments);
-        }else{
-          return NewsDetails(id: 0,);
+        if (!currentFocus.hasPrimaryFocus) {
+          FocusScope.of(context).requestFocus(new FocusNode());
         }
-
-        },
-        '/main_screen/add_news' : (context) => add_news(),
-
       },
-        initialRoute:'/auth' ,
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            backgroundColor: Colors.blue,
+            showUnselectedLabels: true,
+            selectedItemColor: Color.fromRGBO(68, 167, 184, 1),
+            unselectedItemColor: Color.fromRGBO(144, 153, 170, 1),
+            unselectedLabelStyle: TextStyle(color:Color.fromRGBO(144, 153, 170, 1) ),
+            selectedLabelStyle:TextStyle(color:Color.fromRGBO(144, 153, 170, 1) ) ,
 
+          )
+        ),
+        routes: {
+          '/auth' : (context)  => LoginForm(),
+          '/main_screen' : (context) => NavBar(),
+          '/main_screen/movie_details' : (context) {
+          final arguments =  ModalRoute.of(context)!.settings.arguments;
+          if(arguments is int){
+            return NewsDetails(id: arguments);
+          }else{
+            return NewsDetails(id: 0,);
+          }
+
+          },
+          '/main_screen/add_news' : (context) => add_news(),
+          '/main_screen/applications' : (context) => ApplicationsList(),
+          '/main_screen/attendance' : (context) => Attendance(),
+          '/main_screen/employees': (context) => Employees(),
+          '/main_screen/create_application_pattern': (context) => CreateApplicationPattern(),
+          '/main_screen/create_employee': (context) => CreateEmployee()
+        },
+          initialRoute:'/auth' ,
+
+      ),
     );
   }
 }
