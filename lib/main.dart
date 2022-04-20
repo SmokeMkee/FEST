@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:itfest/profile/profile.dart';
 
 import 'login/login.dart';
 import 'nav_bar/navigation_bar.dart';
@@ -39,7 +40,8 @@ class MyApp extends StatelessWidget {
         }
 
         },
-        '/main_screen/add_news' : (context) => add_news()
+        '/main_screen/add_news' : (context) => add_news(),
+
       },
         initialRoute:'/auth' ,
 
