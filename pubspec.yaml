@@ -37,6 +37,8 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   image_picker: ^0.8.5
+  syncfusion_flutter_datepicker: ^20.1.50
+  font_awesome_flutter: ^10.1.0
 
 dev_dependencies:
   flutter_test:
@@ -78,7 +80,6 @@ flutter:
   - assets/open_task_icon.svg
   - assets/in_process_icon.svg
   - assets/success_icon.svg
-
   - assets/arrow_profile.svg
   - assets/help-profile.svg
   - assets/personal-information.svg

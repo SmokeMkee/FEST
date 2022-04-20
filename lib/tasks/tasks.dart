@@ -39,7 +39,8 @@ class _TasksState extends State<Tasks> {
                           color: Colors.white),
                     )),
                     IconButton(onPressed: (){
-                      
+                      Navigator.of(context).pushNamed("/main_screen/create_task");
+
                     }, icon: SvgPicture.asset('assets/add.svg'))
                   ],
                 ),

@@ -5,6 +5,7 @@ import 'package:itfest/services/attendance/attendance.dart';
 import 'package:itfest/services/employees/create_employee.dart';
 import 'package:itfest/services/employees/employees.dart';
 import 'package:itfest/profile/profile.dart';
+import 'package:itfest/tasks/create_task.dart';
 
 import 'login/login.dart';
 import 'nav_bar/navigation_bar.dart';
@@ -58,7 +59,8 @@ class MyApp extends StatelessWidget {
           '/main_screen/attendance' : (context) => Attendance(),
           '/main_screen/employees': (context) => Employees(),
           '/main_screen/create_application_pattern': (context) => CreateApplicationPattern(),
-          '/main_screen/create_employee': (context) => CreateEmployee()
+          '/main_screen/create_employee': (context) => CreateEmployee(),
+          '/main_screen/create_task': (context) => CreateTask()
         },
           initialRoute:'/auth' ,
 
