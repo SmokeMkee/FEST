@@ -226,15 +226,15 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                           positionNames.add({"positionName": controllers[i].text});
                         }
 
-                        AccountController.createEmployee({
-                          {
-                            "fullName": name.text,
-                            "email": email.text,
-                            "role": role,
-                            "departmentName": department.text,
-                            "positions": positionNames
-                          }
-                        });
+                        // AccountController.createEmployee({
+                        //   {
+                        //     "fullName": name.text,
+                        //     "email": email.text,
+                        //     "role": role,
+                        //     "departmentName": department.text,
+                        //     "positions": positionNames
+                        //   }
+                        // });
 
                       },
                       child: Padding(

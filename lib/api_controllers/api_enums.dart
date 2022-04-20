@@ -9,11 +9,17 @@ class Api{
 
   static Options options = Options(followRedirects: true, headers: headers);
 
-  static Map<String, String> authorizationHeaders (String accessToken) {
-
-    return {
-      "Accept": "application/json; charset=utf-8",
-      "Content-Type": "application/json;charset=utf-8",
-    };
+  static Options authorizeOptions (String accessToken) {
+    return Options(
+        followRedirects: true, headers: authorizationHeaders(accessToken));
   }
+
+    static Map<String, String> authorizationHeaders (String accessToken) {
+
+      return {
+        "Accept": "application/json; charset=utf-8",
+        "Content-Type": "application/json;charset=utf-8",
+      };
+    }
+
 }

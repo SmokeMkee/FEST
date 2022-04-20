@@ -25,15 +25,4 @@ class AccountController {
     return result.statusCode!;
   }
 
-  static Future<int> createEmployee(dynamic data) async{
-    Uri url = Uri.parse(Api.domain + "account/login");
-    Dio dio = Dio();
-    var result = await dio.postUri(url, options: Api.options, data: data);
-
-    print(result.statusCode);
-
-    print(result.data);
-
-    return result.statusCode!;
-  }
 }
