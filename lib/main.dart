@@ -7,6 +7,7 @@ import 'package:itfest/services/employees/employees.dart';
 import 'package:itfest/profile/profile.dart';
 import 'package:itfest/tasks/create_task.dart';
 
+import 'init.dart';
 import 'login/login.dart';
 import 'nav_bar/navigation_bar.dart';
 import 'news/add_news.dart';
@@ -20,6 +21,9 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+
+
+
     return GestureDetector(
       onTap: (){
         FocusScopeNode currentFocus = FocusScope.of(context);
@@ -43,6 +47,8 @@ class MyApp extends StatelessWidget {
           )
         ),
         routes: {
+
+          '/init': (context) => Initialize(),
           '/auth' : (context)  => LoginForm(),
           '/main_screen' : (context) => NavBar(),
           '/main_screen/movie_details' : (context) {
@@ -62,7 +68,7 @@ class MyApp extends StatelessWidget {
           '/main_screen/create_employee': (context) => CreateEmployee(),
           '/main_screen/create_task': (context) => CreateTask()
         },
-          initialRoute:'/auth' ,
+          initialRoute:'/init',
 
       ),
     );

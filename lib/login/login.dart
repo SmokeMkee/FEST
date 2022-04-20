@@ -1,8 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:itfest/api_controllers/account_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginForm extends StatelessWidget {
-  const LoginForm({Key? key}) : super(key: key);
+class LoginForm extends StatefulWidget {
+  LoginForm({Key? key}) : super(key: key);
+
+  @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  TextEditingController email = TextEditingController();
+
+  TextEditingController password = TextEditingController();
+
+  @override
+  void initState() {
+    final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+
+    _prefs.then((value) {
+      if(value.getKeys().contains('accessToken')){
+        Navigator.of(context).pushReplacementNamed('/main_screen');
+      }
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,16 +53,17 @@ class LoginForm extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(15),
-                    child: Expanded(child: Text('ВХОД' , style: TextStyle(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Text('ВХОД' , style: TextStyle(
                       fontSize: 35,
                       fontWeight: FontWeight.w900,
                       color: Color.fromRGBO(66, 104, 124, 1)
-                    ),)),
+                    ),),
                   ),
                 ],
               ),
               TextField(
+                controller: email,
                 decoration: InputDecoration(
                     fillColor: Color.fromRGBO(246, 246, 246, 1),
                     contentPadding: EdgeInsets.all(20),
@@ -55,6 +80,7 @@ class LoginForm extends StatelessWidget {
                 height: 15,
               ),
               TextField(
+                controller: password,
                 obscureText: true,
                 decoration: InputDecoration(
 
@@ -78,8 +104,13 @@ class LoginForm extends StatelessWidget {
                   Expanded(
                       child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed('/main_screen');
+                      AccountController.login(email.text, password.text).then((value) {
+                        if(value == 200){
+                          Navigator.of(context).pushReplacementNamed('/main_screen');
+                        }
+                      });
+
+                      // Navigator.of(context).pushReplacementNamed('/main_screen');
                     },
                     child: Text(
                       'ВОЙТИ',
@@ -93,7 +124,6 @@ class LoginForm extends StatelessWidget {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(50)))),
                   )),
-
                 ],
               ),
               SizedBox(
@@ -107,7 +137,6 @@ class LoginForm extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-
             ],
           ),
         ),

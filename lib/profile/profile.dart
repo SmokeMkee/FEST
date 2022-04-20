@@ -175,8 +175,7 @@ class _image_pickerState extends State<image_picker> {
               )
             ],
           ),
-        ),
-        SvgPicture.asset('assets/change-foto-profile.svg')
+        )
       ],
     );
   }

@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:itfest/api_controllers/account_controller.dart';
 
 class CreateEmployee extends StatefulWidget {
   const CreateEmployee({Key? key}) : super(key: key);
@@ -15,6 +17,10 @@ class _CreateEmployeeState extends State<CreateEmployee> {
 
   List<String> roles = <String>['Обычный пользователь', 'Администратор', 'Модератор' , 'Глава департамента', 'Менеджер Департамента'];
   List<TextEditingController> controllers = <TextEditingController>[];
+  TextEditingController name = TextEditingController();
+  TextEditingController email = TextEditingController();
+  TextEditingController phone = TextEditingController();
+  TextEditingController department = TextEditingController();
 
   @override
   void initState() {
@@ -58,6 +64,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
               children: [
                 SizedBox(height: 20,),
                 TextFormField(
+                  controller: name,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black), borderRadius: borderRaduis),
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 216, 224, 228))),
@@ -67,6 +74,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                 ),
                 SizedBox(height: 20,),
                 TextFormField(
+                  controller: email,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black), borderRadius: borderRaduis),
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 216, 224, 228))),
@@ -76,6 +84,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                 ),
                 SizedBox(height: 20,),
                 TextFormField(
+                  controller: phone,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black), borderRadius: borderRaduis),
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 216, 224, 228))),
@@ -195,6 +204,7 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                 ),
                 SizedBox(height: 20,),
                 TextFormField(
+                  controller: department,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black), borderRadius: borderRaduis),
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 216, 224, 228))),
@@ -210,6 +220,21 @@ class _CreateEmployeeState extends State<CreateEmployee> {
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     child: TextButton(
                       onPressed: () {
+                        List<dynamic> positionNames = [];
+
+                        for(int i = 0; i < controllers.length; i++){
+                          positionNames.add({"positionName": controllers[i].text});
+                        }
+
+                        AccountController.createEmployee({
+                          {
+                            "fullName": name.text,
+                            "email": email.text,
+                            "role": role,
+                            "departmentName": department.text,
+                            "positions": positionNames
+                          }
+                        });
 
                       },
                       child: Padding(
