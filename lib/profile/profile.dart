@@ -49,7 +49,9 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: 70),
+                    SizedBox(height: 10),
+                    Divider(height: 5,),
+                    SizedBox(height: 10),
                     Text(
                       'ДАННЫЕ АККАУНТА',
                       style: TextStyle(
@@ -61,9 +63,9 @@ class _ProfileState extends State<Profile> {
                         'Внешний вид', 'assets/arrow_profile.svg'),
                     button_constructor('assets/push_profile.svg',
                         'Push - уведомления ', 'assets/arrow_profile.svg'),
-                    SizedBox(
-                      height: 25,
-                    ),
+                    SizedBox(height: 15),
+                    Divider(height: 5,),
+                    SizedBox(height: 15),
                     Text(
                       'ДОПОЛНИТЕЛЬНО',
                       style: TextStyle(
@@ -147,6 +149,7 @@ class _image_pickerState extends State<image_picker> {
                 fit: BoxFit.cover,
                 width: 100,
                 height: 100,
+
               )),
         ),
         SizedBox(width: 20),
@@ -157,17 +160,18 @@ class _image_pickerState extends State<image_picker> {
             children: [
               Text(
                 'Азиз Маратович',
-                style: TextStyle(fontSize: 19),
+                style: TextStyle(fontSize: 19 , color: Color.fromRGBO(66, 104, 124, 1) , fontWeight: FontWeight.w600),
               ),
+
               SizedBox(height: 5),
               Text(
                 'Алматинская обл., г. Алматы',
-                style: TextStyle(fontSize: 13),
+                style: TextStyle(fontSize: 13 , color: Color.fromRGBO(66, 104, 124, 0.8)),
               ),
               SizedBox(height: 5),
               Text(
                 '+7 (777) 123 23 23',
-                style: TextStyle(color: Colors.grey, fontSize: 14),
+                style: TextStyle(color: Color.fromRGBO(66, 104, 124, 0.6), fontSize: 14 , ),
               )
             ],
           ),
@@ -203,64 +207,28 @@ class button_constructor extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 lefticon,
+                color: Color.fromRGBO(66, 104, 124, 1),
               ),
               SizedBox(width: 10),
               Expanded(
                   child: Text(
                     text,
                     style: TextStyle(
+                      color: Color.fromRGBO(66, 104, 124, 1),
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                   )),
-              SvgPicture.asset(righticon),
+              SvgPicture.asset(righticon , color: Color.fromRGBO(66, 104, 124, 1),),
             ],
           ),
         ),
+
       ],
     );
   }
 }
 
-class bottom_button_profile extends StatelessWidget {
-  String text = '';
-  bottom_button_profile(String text) {
-    this.text = text;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-        Expanded(
-          child: ElevatedButton(
-            onPressed: () {},
-            child: Text(
-              text,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(
-                  Color.fromRGBO(80, 101, 142, 1),
-                ),
-                padding: MaterialStateProperty.all(
-                    EdgeInsets.symmetric(vertical: 15)),
-                shape: MaterialStateProperty.all(
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(19), top: Radius.circular(19)),
-                  ),
-                )),
-          ),
-        ),
-      ]),
-    );
-  }
-}
 
 class bottom_button_profile_quit extends StatelessWidget {
   String text = '';
@@ -279,18 +247,16 @@ class bottom_button_profile_quit extends StatelessWidget {
             child: Text(
               text,
               style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black),
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white),
             ),
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(
-                  Colors.white,
+                  Color.fromRGBO(66, 104, 124, 1),
                 ),
                 padding: MaterialStateProperty.all(
                     EdgeInsets.symmetric(vertical: 15)),
-                side: MaterialStateProperty.all(BorderSide(
-                    color: Color.fromRGBO(80, 101, 142, 1), width: 1)),
                 shape: MaterialStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.vertical(
