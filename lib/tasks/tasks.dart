@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:itfest/api_controllers/account_controller.dart';
+import 'package:itfest/api_controllers/task_controller.dart';
 import 'package:itfest/app_bar/app_bar.dart';
 import 'package:itfest/enums/CustomColors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Tasks extends StatefulWidget {
   const Tasks({Key? key}) : super(key: key);
@@ -12,6 +15,32 @@ class Tasks extends StatefulWidget {
 
 class _TasksState extends State<Tasks> {
   int selected = 1;
+  var tasks;
+
+  @override
+  void initState() {
+    String accessToken = "";
+
+    Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+
+    prefs.then((value) {
+      accessToken = value.getString("accessToken")!;
+      AccountController.accountInfo(value.getString("accessToken")!).then((value) {
+
+        print(value.data);
+        TaskController.get([value.data['id']], accessToken).then((value) {
+          setState(() {
+            tasks = value;
+            print(tasks);
+          });
+        });
+      });
+    });
+
+
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

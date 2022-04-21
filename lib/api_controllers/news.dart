@@ -18,7 +18,7 @@ class NewsController {
   }
 
   static Future<dynamic> getNews(String accsestoken) async{
-    Uri url = Uri.parse(Api.domain + "post/get/all/");
+    Uri url = Uri.parse(Api.domain + "post/get/all/" + 1.toString() + "," + 10.toString());
     Dio dio = Dio();
     var result = await dio.getUri(url, options:Api.authorizeOptions(accsestoken));
 
@@ -26,7 +26,7 @@ class NewsController {
 
     print(result.data);
 
-    return result.data;
+    return result;
   }
 
 

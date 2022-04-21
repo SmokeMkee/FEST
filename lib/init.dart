@@ -19,9 +19,6 @@ class _InitializeState extends State<Initialize> {
 
     Future<SharedPreferences> prefs = SharedPreferences.getInstance();
 
-    prefs.then((value) {
-      value.clear();
-    });
 
     EnterpriseController.isInitialized().then((value) {
       if(value == 200){

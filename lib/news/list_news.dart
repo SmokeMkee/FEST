@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:itfest/api_controllers/news.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class News {
   final int id;
@@ -96,11 +98,22 @@ class _ListNewsState extends State<ListNews> {
 
   @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
+
+    Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+    prefs.then((value){
+      NewsController.getNews(value.getString("accessToken")!).then((value) {
+        print(value.data);
+      }).onError((error, stackTrace) {
+        print(error);
+      });
+    });
+
     _searchNews();
     search_controller.addListener(() {
       _searchNews();
+
+      super.initState();
+
     });
   }
 

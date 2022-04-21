@@ -14,4 +14,24 @@ class TaskController{
 
     return result;
   }
+
+  static Future get(List<int> users, String accessToken) async {
+    String url = Api.domain + "task/get?";
+
+    for(int i = 0; i < users.length; i++){
+      url += "users=" + users[i].toString();
+      if(i < users.length - 1){
+        url += "&";
+      }
+    }
+
+    Dio dio = Dio();
+    var result = await dio.getUri(Uri.parse(url), options: Api.authorizeOptions(accessToken));
+
+    print(result.statusCode);
+
+    print(result.data);
+
+    return result;
+  }
 }
