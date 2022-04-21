@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:itfest/api_controllers/account_controller.dart';
+import 'package:itfest/enums/CustomColors.dart';
 
 class Employees extends StatefulWidget {
   const Employees({Key? key}) : super(key: key);
@@ -9,6 +11,24 @@ class Employees extends StatefulWidget {
 }
 
 class _EmployeesState extends State<Employees> {
+  List employees = [];
+
+  @override
+  void initState() {
+
+    AccountController.getAll().then((value) {
+      print(value.data);
+
+      setState(() {
+        for(int i = 0; i < value.data.length; i++){
+          employees.add(value.data[i]);
+        }
+      });
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,6 +113,35 @@ class _EmployeesState extends State<Employees> {
                     ],
                   ),
                 ),
+                ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: employees.length,
+                    itemBuilder: (context,index){
+                      return  Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Container(
+                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(color: CustomColors.colors['dark-blue']!, width: 2)),
+                          child: Row(
+                            children: [
+                              Image.network("https://img.icons8.com/ios-filled/50/000000/cat-profile.png", width: 64,),
+                              SizedBox(width: 10,),
+                              Expanded(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(employees[index]['name'], textAlign: TextAlign.start, style: TextStyle(fontSize: 20)),
+                                    Text(employees[index]['departmentName'], textAlign: TextAlign.start, style: TextStyle(fontSize: 14),)
+                                  ],
+                                )
+                              ),
+
+                            ],
+                          ),
+                        ),
+                      );
+                    }),
               ],
             ),
           ),

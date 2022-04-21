@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:itfest/api_controllers/department_controller.dart';
+import 'package:itfest/api_controllers/request_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CreateApplicationPattern extends StatefulWidget {
   const CreateApplicationPattern({Key? key}) : super(key: key);
@@ -79,6 +81,7 @@ class _CreateApplicationPatternState extends State<CreateApplicationPattern> {
                 Padding(
                   padding: const EdgeInsets.only(top: 20),
                   child: TextFormField(
+                    controller: name,
                     decoration: InputDecoration(
                         border: OutlineInputBorder(borderSide: BorderSide(color: Colors.black), borderRadius: borderRaduis),
                         focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Color.fromARGB(255, 216, 224, 228))),
@@ -214,14 +217,20 @@ class _CreateApplicationPatternState extends State<CreateApplicationPattern> {
                         color: Color.fromARGB(255, 66, 104, 124),
                         borderRadius: BorderRadius.all(Radius.circular(20))),
                     child: TextButton(
-                      onPressed: () {
+                      onPressed: () async {
                         dynamic data = {};
 
                         data['name'] = name.text;
-
+                        data['departmentName'] = department == "Для целой организации" ? "organization" : department;
+                        data['patternItems'] = [];
                         for(int i = 0; i < controllers.length; i++){
-                          print(controllers[i].text);
+                          data['patternItems'].add({"fieldName": controllers[i].text});
                         }
+
+                        print(data);
+
+                        SharedPreferences prefs = await SharedPreferences.getInstance();
+                        RequestController.createPattern(data, prefs.getString("accessToken")!);
                       },
                       child: Padding(
                         padding:

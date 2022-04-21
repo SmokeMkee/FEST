@@ -48,5 +48,23 @@ class AccountController {
     return result.statusCode!;
   }
 
+  static Future getAll() async {
+    Uri url = Uri.parse(Api.domain + "account/get/all");
+    Dio dio = Dio();
+    var result = await dio.getUri(url, options: Api.options);
 
+    print(result.statusCode);
+
+    return result;
+  }
+
+  static Future accountInfo(String accessToken) async {
+    Uri url = Uri.parse(Api.domain + "account/info");
+    Dio dio = Dio();
+    var result = await dio.getUri(url, options: Api.authorizeOptions(accessToken));
+
+    print(result.statusCode);
+
+    return result;
+  }
 }

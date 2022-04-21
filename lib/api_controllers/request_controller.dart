@@ -18,4 +18,28 @@ class RequestController{
 
     return result.statusCode!;
   }
+
+  static Future<List> get(String departmentName) async {
+    Uri url = Uri.parse(Api.domain + "request/pattern/get/" + departmentName);
+    Dio dio = Dio();
+    var result = await dio.getUri(url, options: Api.options);
+
+    print(result.statusCode);
+
+    print(result.data);
+
+    return (result.data! as List);
+  }
+
+  static Future getById(int id) async {
+    Uri url = Uri.parse(Api.domain + "request/pattern/get/" + id.toString());
+    Dio dio = Dio();
+    var result = await dio.getUri(url, options: Api.options);
+
+    print(result.statusCode);
+
+    print(result.data);
+
+    return (result.data);
+  }
 }

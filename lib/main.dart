@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:itfest/services/applications/MakeApplication.dart';
 import 'package:itfest/services/applications/applications_list.dart';
 import 'package:itfest/services/applications/create_application_pattern.dart';
 import 'package:itfest/services/attendance/attendance.dart';
@@ -66,7 +67,8 @@ class MyApp extends StatelessWidget {
           '/main_screen/employees': (context) => Employees(),
           '/main_screen/create_application_pattern': (context) => CreateApplicationPattern(),
           '/main_screen/create_employee': (context) => CreateEmployee(),
-          '/main_screen/create_task': (context) => CreateTask()
+          '/main_screen/create_task': (context) => CreateTask(),
+          "/main_screen/application_details": (context) => MakeApplication(ModalRoute.of(context)!.settings.arguments as int)
         },
           initialRoute:'/init',
 

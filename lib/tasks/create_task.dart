@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
+import 'package:itfest/api_controllers/account_controller.dart';
+import 'package:itfest/api_controllers/department_controller.dart';
+import 'package:itfest/api_controllers/task_controller.dart';
 import 'package:itfest/entities/User.dart';
 import 'package:itfest/enums/CustomColors.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class CreateTask extends StatefulWidget {
@@ -24,7 +28,7 @@ class _CreateTaskState extends State<CreateTask> {
 
   User? user;
 
-  List<User> users = <User>[User(0, "Не присваивать", "", "", [""], "", DateTime.now())];
+  List<User> users = [];
 
   /// The method for [DateRangePickerSelectionChanged] callback, which will be
   /// called whenever a selection changed on the date picker widget.
@@ -47,7 +51,7 @@ class _CreateTaskState extends State<CreateTask> {
             // ignore: lines_longer_than_80_chars
             ' ${DateFormat('dd/MM/yyyy').format(args.value.endDate ?? args.value.startDate)}';
       } else if (args.value is DateTime) {
-        _selectedDate = DateFormat('dd/MM/yyyy').format(args.value);
+        _selectedDate = DateFormat('yyyy-MM-dd').format(args.value);
       } else if (args.value is List<DateTime>) {
         _dateCount = args.value.length.toString();
       } else {
@@ -63,18 +67,40 @@ class _CreateTaskState extends State<CreateTask> {
 
   String department = 'Бухгалтерия';
 
-  List<String> departments = <String>[
-    'Бухгалтерия',
-    'Технический департамент',
-    'Модератор',
-    'Глава департамента',
-    'Менеджер Департамента'
-  ];
+  List<String> departments = <String>[];
   List<TextEditingController> controllers = <TextEditingController>[];
+
+  TextEditingController name = TextEditingController();
+  TextEditingController description = TextEditingController();
 
   @override
   void initState() {
-    // TODO: implement initState
+    DepartmentController.get().then((value) {
+      setState(() {
+        var list = value as List;
+
+        for(int i = 0; i < list.length; i++){
+          if(list[i]['name'] == "organization"){
+            departments.add("Для целой организации");
+            continue;
+          }
+          departments.add(list[i]['name']);
+        }
+        department = "Для целой организации";
+      });
+    });
+
+    AccountController.getAll().then((value) {
+      print(value.data);
+      print(value.statusCode);
+
+      setState(() {
+        for(int i = 0; i < value.data.length; i++){
+          users.add(User(value.data[i]['id'], value.data[i]['name'], value.data[i]['email'], value.data[i]['department'], [], "", DateTime.now()));
+        }
+      });
+    });
+
     controllers.add(TextEditingController());
   }
 
@@ -83,7 +109,7 @@ class _CreateTaskState extends State<CreateTask> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: PreferredSize(
-            preferredSize: Size.fromHeight(60.0), // here the desired height
+            preferredSize: Size.fromHeight(60.0),
             child: AppBar(
               backgroundColor: Color.fromRGBO(66, 104, 124, 1),
               shape: RoundedRectangleBorder(
@@ -154,6 +180,7 @@ class _CreateTaskState extends State<CreateTask> {
                       height: 20,
                     ),
                     TextFormField(
+                      controller: name,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.black),
@@ -170,6 +197,7 @@ class _CreateTaskState extends State<CreateTask> {
                       height: 20,
                     ),
                     TextFormField(
+                      controller: description,
                       keyboardType: TextInputType.multiline,
                       maxLines: null,
                       decoration: InputDecoration(
@@ -229,36 +257,27 @@ class _CreateTaskState extends State<CreateTask> {
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: DropdownButtonFormField(
-                              decoration: InputDecoration(
-                                  labelText: "Департамент",
-                                  labelStyle: TextStyle(fontSize: 20),
-                                  border: OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                      const Radius.circular(15.0),
-                                    ),
-                                  ),
-                                  filled: true,
-                                  ),
-                              value: department,
-                              items: departments.map<DropdownMenuItem<String>>(
-                                  (String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                              onChanged: (String? newValue) {
-                                setState(() {
-                                  department = newValue!;
-                                });
-                              }),
-                        )
-                      ],
-                    ),
+                    DropdownButtonFormField(
+                        decoration: InputDecoration(
+                          labelText: "Департамент",
+                          labelStyle: TextStyle(fontSize: 20),
+                          border: OutlineInputBorder(
+                            borderRadius: const BorderRadius.all(
+                              const Radius.circular(15.0),
+                            ),
+                          ),
+                        ),
+                        value: department,
+                        items: departments.map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(), onChanged: (String? newValue){
+                      setState(() {
+                        department = newValue!;
+                      });
+                    }),
 
 
                     SizedBox(
@@ -283,7 +302,12 @@ class _CreateTaskState extends State<CreateTask> {
                                       (User value) {
                                     return DropdownMenuItem<User>(
                                       value: value,
-                                      child: Text(value.fullName!),
+                                      child: Row(
+                                        children: [
+                                          Image.network("https://img.icons8.com/ios-filled/50/000000/cat-profile.png", width: 64,),
+                                          Text(value.fullName!),
+                                        ],
+                                      ),
                                     );
                                   }).toList(),
                               onChanged: (User? newValue) {
@@ -302,7 +326,27 @@ class _CreateTaskState extends State<CreateTask> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(20))),
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () async {
+
+                            SharedPreferences prefs = await SharedPreferences.getInstance();
+                            try{
+                              var requestBody = {
+                                "name": name.text,
+                                "description": description.text,
+                                "deadline": _selectedDate! + "T00:00:00",
+                                "userId": user?.id,
+                                "departmentName": (department == "Для целой организации" ? "organization" : department)
+                            };
+
+                              print(requestBody);
+
+                              TaskController.create(
+                                  requestBody, prefs.getString("accessToken")!);
+                            } catch(e){
+                              print(e);
+                            }
+
+                          },
                           child: Padding(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 0, vertical: 10),

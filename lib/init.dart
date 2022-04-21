@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:itfest/api_controllers/enterprise_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Initialize extends StatefulWidget {
   const Initialize({Key? key}) : super(key: key);
@@ -15,6 +16,12 @@ class _InitializeState extends State<Initialize> {
 
   @override
   void initState() {
+
+    Future<SharedPreferences> prefs = SharedPreferences.getInstance();
+
+    prefs.then((value) {
+      value.clear();
+    });
 
     EnterpriseController.isInitialized().then((value) {
       if(value == 200){
