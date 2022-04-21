@@ -28,7 +28,15 @@ class _EmployeesState extends State<Employees> {
 
     super.initState();
   }
+  List chatUsers = [
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT6eXk0IwHSiexF2ciMnRXDzc3TpYPqCYeofg&usqp=CAU",
+      "https://images11.cosmopolitan.ru/upload/img_cache/12d/12d2e3af103da435cacaaa25d60d26cc_cropped_550x740.jpg",
+      "https://avatanplus.com/files/photos/original/590ec8ec7139115be1c0dbb0.jpg",
+     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnlwDwZoELDkLhCciJCWjcMesI08GR-YVPQw&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYUyjMowxdddDUMXbCx_GSjxEc7d_k58g_4Q&usqp=CAU",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYUyjMowxdddDUMXbCx_GSjxEc7d_k58g_4Q&usqp=CAU"
 
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -121,20 +129,37 @@ class _EmployeesState extends State<Employees> {
                       return  Padding(
                         padding: const EdgeInsets.only(top: 5),
                         child: Container(
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), border: Border.all(color: CustomColors.colors['dark-blue']!, width: 2)),
+                          padding: EdgeInsets.only(left: 16,right: 16,top: 10,bottom: 10),
                           child: Row(
-                            children: [
-                              Image.network("https://img.icons8.com/ios-filled/50/000000/cat-profile.png", width: 64,),
-                              SizedBox(width: 10,),
+                            children: <Widget>[
                               Expanded(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(employees[index]['name'], textAlign: TextAlign.start, style: TextStyle(fontSize: 20)),
-                                    Text(employees[index]['departmentName'], textAlign: TextAlign.start, style: TextStyle(fontSize: 14),)
+                                child: Row(
+                                  children: <Widget>[
+                                    CircleAvatar(
+                                      backgroundImage: NetworkImage(chatUsers[index]),
+                                      maxRadius: 30,
+                                    ),
+                                    SizedBox(width: 16,),
+                                    Expanded(
+                                      child: Container(
+                                        color: Colors.transparent,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Row(
+                                              children: [
+                                                Expanded(child: Text(employees[index]['name'], style: TextStyle(fontSize: 18),)),
+                                                Text(employees[index]['departmentName'], style: TextStyle(fontSize: 14),),
+                                              ],
+                                            ),
+                                            SizedBox(height: 6,),
+                                            Text(employees[index]['email'],style: TextStyle(fontSize: 13,color: Colors.grey.shade600, ),),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
                                   ],
-                                )
+                                ),
                               ),
 
                             ],

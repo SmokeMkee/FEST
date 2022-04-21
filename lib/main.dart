@@ -8,6 +8,7 @@ import 'package:itfest/services/employees/employees.dart';
 import 'package:itfest/profile/profile.dart';
 import 'package:itfest/tasks/create_task.dart';
 
+import 'chat/swap_chat.dart';
 import 'init.dart';
 import 'login/login.dart';
 import 'nav_bar/navigation_bar.dart';
@@ -68,7 +69,8 @@ class MyApp extends StatelessWidget {
           '/main_screen/create_application_pattern': (context) => CreateApplicationPattern(),
           '/main_screen/create_employee': (context) => CreateEmployee(),
           '/main_screen/create_task': (context) => CreateTask(),
-          "/main_screen/application_details": (context) => MakeApplication(ModalRoute.of(context)!.settings.arguments as int)
+          "/main_screen/application_details": (context) => MakeApplication(ModalRoute.of(context)!.settings.arguments as int),
+          "/main_screen/swap_cahts" : (context) => SwapChatWidget()
         },
           initialRoute:'/init',
 

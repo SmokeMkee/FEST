@@ -21,7 +21,7 @@ class _ApplicationsListState extends State<ApplicationsList> {
       setState(() {
         applications = value;
       });
-      super.initState();
+
     });
 
 

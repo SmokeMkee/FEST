@@ -1,8 +1,12 @@
+import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:image_picker/image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:itfest/news/add_news.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -80,7 +84,8 @@ class _ProfileState extends State<Profile> {
                     SizedBox(
                       height: 40,
                     ),
-                    bottom_button_profile_quit('Выйти')
+                    bottom_button_profile_quit('Выйти'),
+
                   ],
                 ),
               )
@@ -101,11 +106,19 @@ class image_picker extends StatefulWidget {
 
 class _image_pickerState extends State<image_picker> {
   File? pickedImage;
+
+
+
   pickImages(ImageSource image) async {
     final photo = await ImagePicker().pickImage(source: image);
     if (photo == null) {
       return;
     }
+    File imagefile = File(photo.path); //convert Path to File
+    Uint8List imagebytes = await imagefile.readAsBytes(); //convert to bytes
+    imageBase64 = base64.encode(imagebytes);
+
+
     final tempImage = File(photo.path);
     setState(() {
       pickedImage = tempImage;
@@ -128,7 +141,8 @@ class _image_pickerState extends State<image_picker> {
             shape: BoxShape.circle,
           ),
           child: IconButton(
-              onPressed: () async {
+              onPressed: ()  {
+
                 pickImages(
                   ImageSource.gallery,
                 );
