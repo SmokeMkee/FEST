@@ -12,7 +12,7 @@ class NewsController {
     Uri url = Uri.parse(Api.domain + "post/create");
     Dio dio = Dio();
     print(data);
-    var result = await dio.postUri(url, options: Api.authorizeOptions(accsestoken), data: jsonEncode(data));
+    var result = await dio.postUri(url, options: Api.authorizeOptions(accsestoken), data: data);
     print(data);
     return result.statusCode!;
   }

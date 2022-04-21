@@ -263,13 +263,6 @@ class bottom_button_profile_quit extends StatelessWidget {
         Expanded(
           child: ElevatedButton(
             onPressed: () async {
-              print(title);
-              print(department);
-              print(description);
-
-              print(imageBase64);
-
-
 
               SharedPreferences prefs = await SharedPreferences.getInstance();
               try {
