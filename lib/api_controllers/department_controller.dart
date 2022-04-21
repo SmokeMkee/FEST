@@ -23,10 +23,11 @@ class DepartmentController {
     Uri url = Uri.parse(Api.domain + "department/get");
     Dio dio = Dio();
     var result = await dio.getUri(url, options: Api.options);
-
+    print("Dasdas");
     print(result.statusCode);
-
+    print("Dasdas");
     print(result.data);
+    print("Dasdas");
     return result.data;
   }
 

@@ -92,6 +92,7 @@ flutter:
   - assets/change-foto-profile.svg
   - assets/photo-profile.svg
   - assets/logo.svg
+  - assets/addphoto.svg
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
