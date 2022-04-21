@@ -177,7 +177,7 @@ class _add_newsState extends State<add_news> {
                 });
               }),
               SizedBox(height: 40,),
-              bottom_button_profile_quit('Выйти' , title.text , description.text , departs),
+              bottom_button_profile_quit('Сохранить' , title.text , description.text , departs),
             ],
           ),
         ),

@@ -36,41 +36,41 @@ class _ListNewsState extends State<ListNews> {
         title: 'IT-FEST 2022',
         image:
             'https://static.wixstatic.com/media/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg/v1/fill/w_960,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg',
-        time: '45 минут назад',
+        time: '15 минут назад',
         description:
             'Это возможность в короткие сроки в мощной творческой обстановке реализовать проект ssssssssssssssss'),
     News(
         id: 2,
-        title: 'IT-FEST 2022',
+        title: 'Как обеспечить кибербезопасность компании в мире',
         image:
-            'https://static.wixstatic.com/media/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg/v1/fill/w_960,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg',
+            'https://media.tproger.ru/uploads/2022/04/2327900_guard_security_warning_icon-cover-icon.png',
         time: '45 минут назад',
         description:
-            'Это возможность в короткие сроки в мощной творческой обстановке реализовать проект ssssssssssssssss'),
+            '2020 год и пандемия внесли существенные коррективы в работу большинства компаний. Переход в онлайн и вынужденная цифровая трансформация принесли в жизнь руководителей широкий спектр новых рисков, к которым многие были просто не готовы. Последствия кибератак, технической неисправности сервисов или человеческой ошибки могут серьезно повредить бизнесу. Рассказываем, какие меры необходимо принять бизнесу для защиты от кибер-угроз.'),
     News(
         id: 3,
-        title: 'IT-FEST 2022',
+        title: 'Какие существуют сервисы для нефункционального ручного тестирования для новичков?',
         image:
-            'https://static.wixstatic.com/media/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg/v1/fill/w_960,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg',
-        time: '45 минут назад',
+            'https://media.tproger.ru/uploads/2022/04/738055_robot_bot_icon-cover-icon.png',
+        time: '4 часа назад минут назад',
         description:
-            'Это возможность в короткие сроки в мощной творческой обстановке реализовать проект ssssssssssssssss'),
+            'Выполняя функциональное тестирование, мы проверяем, что делает продукт, тогда как нефункциональное тестирование описывает, как он работает. Например, когда вы вводите в поисковую строку сайта какой-либо запрос, то за релевантность выданных результатов отвечает функциональный тест, а за скорость выгрузки — нефункциональный.'),
     News(
       id: 4,
-        title: 'IT-FEST 2022',
+        title: 'Скрапинг с Goutte (crawler). Парсинг сайтов с использованием библиотеки Goutte',
         image:
-            'https://static.wixstatic.com/media/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg/v1/fill/w_960,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg',
-        time: '45 минут назад',
+            'Выполняя функциональное тестирование, мы проверяем, что делает продукт, тогда как нефункциональное тестирование описывает, как он работает. Например, когда вы вводите в поисковую строку сайта какой-либо запрос, то за релевантность выданных результатов отвечает функциональный тест, а за скорость выгрузки — нефункциональный.',
+        time: '8 часов 46 минут назад',
         description:
-            'Это возможность в короткие сроки в мощной творческой обстановке реализовать проект ssssssssssssssss'),
+            'одключение библиотеки Goutte и создание запроса на сайт В качестве примера я буду использовать свой сайт. В самом начале нужно сделать запрос на главную страницу, далее мы будем забирать с неё элементы, поэтому код ниже будет использоваться в каждом запросе, просто я его не буду дублировать.'),
     News(
       id: 5,
-        title: 'IT-FEST 2022',
-        image:
-            'https://static.wixstatic.com/media/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg/v1/fill/w_960,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg',
-        time: '45 минут назад',
+        title: 'Написание смарт-контракта для NFT ',
+        image: 'https://media.tproger.ru/uploads/2022/04/8200910_trade_trading_economy_finance_nft_icon-cover-icon.png',
+        time: '12 часа назад',
+
         description:
-            'Это возможность в короткие сроки в мощной творческой обстановке реализовать проект ssssssssssssssss'),
+            'Привет! Меня зовут Костанян Карен, я занимаюсь разработкой на Node.js в цифровом интеграторе Secreate. В этой статье мы разберемся как написать смарт контракт и отчеканить наши нфт.Если у вас нет медиафайлов и метаданных NFT в формате JSON, мы создали коллекцию изображений, с которыми вы можете поэкспериментировать. Вы можете найти медиафайлы здесь и файлы метаданных JSON здесь.'),
     News(
       id: 6,
         title: 'IT-FEST 2021',
@@ -81,6 +81,8 @@ class _ListNewsState extends State<ListNews> {
             'Это возможность в короткие сроки в мощной творческой обстановке реализовать проект ssssssssssssssss'),
   ];
   var filteredNews = <News>[];
+
+ 
 
   final search_controller = TextEditingController();
 
@@ -98,17 +100,20 @@ class _ListNewsState extends State<ListNews> {
 
   @override
   void initState() {
-
+    _searchNews();
     Future<SharedPreferences> prefs = SharedPreferences.getInstance();
     prefs.then((value){
       NewsController.getNews(value.getString("accessToken")!).then((value) {
+        for(int i = 0 ; i < 10 ; i++){
+          _news.add(new News(id: value.data['id'], title: value.data['title'], image: 'https://static.wixstatic.com/media/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg/v1/fill/w_960,h_540,al_c,q_85,usm_0.66_1.00_0.01,enc_auto/8ff6ba_2696386bbe444235b16ee85b5d810abbf000.jpg', time: value.data['creationDate'], description: value.data['content']));
+        }
         print(value.data);
       }).onError((error, stackTrace) {
         print(error);
       });
     });
 
-    _searchNews();
+
     search_controller.addListener(() {
       _searchNews();
 
@@ -116,6 +121,14 @@ class _ListNewsState extends State<ListNews> {
 
     });
   }
+
+  void as(){
+    for(int i = 0 ; i < _news.length ; i++){
+
+    }
+  }
+  
+  
 
   void _onNewsTap(int index){
     final id =_news[index].id;
